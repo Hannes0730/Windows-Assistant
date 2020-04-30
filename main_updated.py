@@ -22,9 +22,8 @@ import pyttsx3  #pip install pyttsx3==2.71
 import speech_recognition as sr
 from API import app_id, weather_api
 import pytz
-import mysql.connector
 from main_mysql_cred import host, user, passwd, database
-from main_GUI import Ui_MainWindow
+import mysql.connector
 
 
 try:
@@ -41,6 +40,7 @@ try:
     mycursor = mydb.cursor(buffered=True)
 except:
     print("Please add your credentials to main_mysql_cred.")
+
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -62,8 +62,8 @@ brave_path_normal = 'C:/Program Files (x86)/BraveSoftware/Brave-Browser/Applicat
 
 #function for synthesizer
 def say(text):
-    call = Ui_MainWindow()
-    #print("Assistant: " + text)
+
+    print("Assistant: " + text)
 
     engine.say(text)
     engine.runAndWait()
@@ -427,7 +427,6 @@ def open_application(said):
               "that application")
         
 
-
 #function to add commands and store it in MySQL database
 def add_commands(said):
     if "add command" in said:
@@ -439,8 +438,8 @@ def add_commands(said):
             say("done")
             mydb.commit()
         finally:
-
             mydb.close()
+
 
 
 #fetch the database and check if there's a result from query
